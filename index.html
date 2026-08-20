@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>گندم‌یار | سامانه جامع مدیریت تلفیقی حاصلخیزی خاک و تغذیه گندم</title>
+  <meta name="description" content="سامانه هوشمند و جامع مدیریت تلفیقی حاصلخیزی خاک و تغذیه بهینه گندم - مبتنی بر دستورالعمل موسسه تحقیقات خاک و آب کشور">
+  <meta name="keywords" content="تغذیه گندم, آزمون خاک, کود اوره, فسفر, پتاسیم, گوگرد, کشاورزی حفاظتی, تنش شوری, تنش خشکی, تنش سرما">
+  <meta name="author" content="صابر حیدری - محقق و عضو هیات علمی مرکز تحقیقات، آموزش و ترویج کشاورزی و منابع طبیعی جنوب استان کرمان">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ========================================================================
+       Sidebar Navigation
+       ======================================================================== -->
+  <aside class="app-sidebar" id="appSidebar">
+    <div class="sidebar-header">
+      <div class="logo-badge">🌾</div>
+      <div class="brand-text">
+        <h1>گندم‌یار</h1>
+        <span>مدیریت تلفیقی حاصلخیزی و تغذیه</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">بخش‌های اصلی</div>
+      <div class="nav-item active" data-view="dashboard">
+        <span class="nav-icon">📊</span>
+        <span>پیشخوان و خلاصه مدیریتی</span>
+      </div>
+      <div class="nav-item" data-view="calculators">
+        <span class="nav-icon">🧮</span>
+        <span>ماشین‌حساب‌های کودی</span>
+      </div>
+      <div class="nav-item" data-view="clinic">
+        <span class="nav-icon">🌿</span>
+        <span>کلینیک هوشمند کمبودها</span>
+      </div>
+      <div class="nav-item" data-view="phenology">
+        <span class="nav-icon">📈</span>
+        <span>فنولوژی و الگوی جذب</span>
+      </div>
+      <div class="nav-item" data-view="stress">
+        <span class="nav-icon">🛡️</span>
+        <span>مدیریت تنش‌های محیطی</span>
+      </div>
+      <div class="nav-item" data-view="conservation">
+        <span class="nav-icon">🌱</span>
+        <span>کشاورزی حفاظتی و بقایا</span>
+      </div>
+
+      <div class="nav-section-title">ابزارها و مراجع</div>
+      <div class="nav-item" data-view="prescription">
+        <span class="nav-icon">📄</span>
+        <span>صدور نسخه کودی مزرعه</span>
+      </div>
+      <div class="nav-item" data-view="converter">
+        <span class="nav-icon">⚖️</span>
+        <span>مبدل ضرایب فرمول‌های کودی</span>
+      </div>
+      <div class="nav-item" data-view="library">
+        <span class="nav-icon">📚</span>
+        <span>دانشنامه و متن ۵ فصل</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-badge" style="background:var(--bg-subtle);padding:0.75rem;border-radius:var(--radius-sm);border:1px solid var(--border-light);margin-bottom:0.4rem;">
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-main);display:flex;align-items:center;gap:0.35rem;">
+          <span>👨‍🔬</span>
+          <span>صابر حیدری</span>
+        </div>
+        <div style="font-size:0.7rem;color:var(--text-muted);margin-top:3px;line-height:1.4;">
+          محقق و عضو هیات علمی مرکز تحقیقات، آموزش و ترویج کشاورزی و منابع طبیعی جنوب استان کرمان
+        </div>
+      </div>
+      <div class="source-tag">
+        🏛️ <strong>مرجع علمی:</strong> موسسه تحقیقات خاک و آب کشور
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Main Content Frame
+       ======================================================================== -->
+  <div class="app-main">
+    
+    <!-- Top Sticky Navigation Bar -->
+    <header class="top-navbar">
+      <div class="navbar-start">
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle Menu">☰</button>
+        <button class="search-trigger-btn" id="searchTriggerBtn">
+          <span>🔍</span>
+          <span>جستجوی سریع عناصر، جداول، علائم...</span>
+          <span class="search-shortcut">Ctrl+K</span>
+        </button>
+      </div>
+
+      <div class="navbar-actions">
+        <button class="icon-btn" id="themeToggleBtn" title="تغییر تم روز/شب">
+          <span>🌙</span>
+        </button>
+        <button class="btn-primary-action" data-nav-target="prescription">
+          <span>⚡</span>
+          <span>صدور نسخه هوشمند مزرعه</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content Wrapper -->
+    <main class="content-wrapper">
+
+      <!-- ====================================================================
+           VIEW 1: Dashboard
+           ==================================================================== -->
+      <section class="page-view active" id="view-dashboard">
+        <div class="hero-banner">
+          <div class="hero-tag">🌾 دستورالعمل جامع مدیریت تلفیقی حاصلخیزی خاک و تغذیه گیاه گندم</div>
+          <h2 class="hero-title">تغذیه متعادل و علمی گندم برای خوداتکایی و پایداری تولید</h2>
+          <p class="hero-desc">
+            این سامانه جامع الکترونیک بر پایه دستورالعمل فنی و کاربردی مؤسسه تحقیقات خاک و آب (وزارت جهاد کشاورزی) طراحی شده و شامل کلیه جداول توصیه‌ای کودی بر اساس آزمون خاک، اقلیم، کشاورزی حفاظتی، مدیریت تنش‌ها و کلینیک تصویری تشخیص کمبودها می‌باشد.
+          </p>
+
+          <div class="hero-metrics">
+            <div class="metric-pill">
+              <div class="metric-icon">🌾</div>
+              <div class="metric-content">
+                <h4>20.4 kg N</h4>
+                <span>برداشت N به ازای هر تن دانه</span>
+              </div>
+            </div>
+            <div class="metric-pill">
+              <div class="metric-icon">🌱</div>
+              <div class="metric-content">
+                <h4>9.4 kg P₂O₅</h4>
+                <span>برداشت P به ازای هر تن دانه</span>
+              </div>
+            </div>
+            <div class="metric-pill">
+              <div class="metric-icon">🍂</div>
+              <div class="metric-content">
+                <h4>18.2 kg K₂O</h4>
+                <span>برداشت K در هر تن کلش گندم</span>
+              </div>
+            </div>
+            <div class="metric-pill">
+              <div class="metric-icon">🧪</div>
+              <div class="metric-content">
+                <h4>27 Tables</h4>
+                <span>جداول کالیبره شده آزمون خاک</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <h2><span>🚀</span> دسترسی سریع به ابزارهای تخصصی</h2>
+          <span class="badge-count">۸ ماژول فعال</span>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card" data-nav-target="calculators">
+            <div>
+              <div class="feature-card-header">
+                <div class="feature-icon-wrapper green">🧮</div>
+                <span class="feature-tag">آزمون خاک و اقلیم</span>
+              </div>
+              <h3>محاسبه‌گر هوشمند اوره، فسفر و پتاسیم</h3>
+              <p>محاسبه دقیق مقادیر کودی بر اساس درصد کربن آلی خاک، اقلیم منطقه، عملکرد هدف و تقویم تقسیط کودی.</p>
+            </div>
+            <div class="feature-card-footer">
+              <span>ورود به ماشین‌حساب</span>
+              <span>←</span>
+            </div>
+          </div>
+
+          <div class="feature-card" data-nav-target="clinic">
+            <div>
+              <div class="feature-card-header">
+                <div class="feature-icon-wrapper amber">🌿</div>
+                <span class="feature-tag">کلینیک بالینی</span>
+              </div>
+              <h3>تشخیص تصویری علائم کمبود عناصر</h3>
+              <p>اینسپکتور اندام‌های گیاه برای تشخیص کمبود نیتروژن، فسفر، پتاسیم، گوگرد، روی، آهن، منگنز، مس و بور.</p>
+            </div>
+            <div class="feature-card-footer">
+              <span>مشاهده علائم و درمان</span>
+              <span>←</span>
+            </div>
+          </div>
+
+          <div class="feature-card" data-nav-target="stress">
+            <div>
+              <div class="feature-card-header">
+                <div class="feature-icon-wrapper blue">🛡️</div>
+                <span class="feature-tag">مدیریت بحران</span>
+              </div>
+              <h3>مدیریت تنش‌های شوری، خشکی، سرما و گرما</h3>
+              <p>محاسبه آبشویی خاک‌های شور، جدول دماهای بحرانی سرمازدگی، فرمول‌های اسیدهای آمینه و هیومیک.</p>
+            </div>
+            <div class="feature-card-footer">
+              <span>راهکارهای کاهش خسارت</span>
+              <span>←</span>
+            </div>
+          </div>
+
+          <div class="feature-card" data-nav-target="phenology">
+            <div>
+              <div class="feature-card-header">
+                <div class="feature-icon-wrapper purple">📈</div>
+                <span class="feature-tag">مقیاس فیکس و زادکس</span>
+              </div>
+              <h3>نقشه فنولوژی و پویایی جذب عناصر</h3>
+              <p>نمودارهای تعاملی منحنی جذب N, P, K در برگ، ساقه و سنبله طی مراحل مختلف رشد رویشی و زایشی.</p>
+            </div>
+            <div class="feature-card-footer">
+              <span>مشاهده منحنی‌ها</span>
+              <span>←</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-callout important" style="margin-top:2rem;">
+          <div>
+            <strong>📌 اصل کلیدی مدیریت تلفیقی حاصلخیزی (INM):</strong>
+            پایداری حاصلخیزی خاک نیازمند ترکیب بهینه منابع معدنی، آلی (کمپوست، کود دامی، کود سبز) و بیولوژیک (باکتری‌های PGPR و تیوباسیلوس) است. مصرف کودهای آلی می‌تواند ۲۵ تا ۳۵ درصد از نیاز کودی شیمیایی را جایگزین کرده و به ازای هر ۰.۱٪ افزایش کربن آلی، ۲۸۶ کیلوگرم بر هکتار عملکرد دانه افزایش می‌یابد.
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 2: Smart Calculators
+           ==================================================================== -->
+      <section class="page-view" id="view-calculators">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>🧮 ماشین‌حساب‌های جامع کودی بر اساس آزمون خاک</h2>
+          <p>محاسبه برخط نیاز کودی گندم آبی و دیم بر اساس کربن آلی خاک، اقلیم، عملکرد هدف و شیوه مصرف.</p>
+        </div>
+
+        <div class="subtabs-container">
+          <button class="subtab-btn active" data-tab="tab-calc-urea">🌱 ۱. کود اوره و نیتروژن</button>
+          <button class="subtab-btn" data-tab="tab-calc-phosphorus">🌾 ۲. فسفر (TSP و DAP)</button>
+          <button class="subtab-btn" data-tab="tab-calc-potassium">🍂 ۳. پتاسیم (SOP و MOP)</button>
+          <button class="subtab-btn" data-tab="tab-calc-salinity">🌊 ۴. اصلاح شوری و آبشویی</button>
+        </div>
+
+        <!-- Tab 1: Urea -->
+        <div class="tab-pane active" id="tab-calc-urea">
+          <div class="calc-grid">
+            <div class="form-panel">
+              <h3 style="margin-bottom:1.25rem;">📝 پارامترهای مزرعه و خاک</h3>
+              
+              <div class="form-group">
+                <label>نوع کشت: <span class="field-hint">آبی یا دیم</span></label>
+                <select class="form-control" id="ureaCultivationType">
+                  <option value="irrigated">گندم آبی (Irrigated)</option>
+                  <option value="rainfed">گندم دیم (Rainfed)</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="ureaClimateGroup">
+                <label>اقلیم منطقه: <span class="field-hint">جدول ۸ تا ۱۱</span></label>
+                <select class="form-control" id="ureaClimate">
+                  <option value="warm-humid">گرم و مرطوب (Warm & Humid)</option>
+                  <option value="warm-dry">گرم و خشک (Warm & Arid)</option>
+                  <option value="temperate" selected>معتدل (Temperate)</option>
+                  <option value="cold">سرد (Cold)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>کربن آلی خاک (OC%): <span class="field-hint">از آزمون خاک</span></label>
+                <div class="input-with-unit">
+                  <input type="number" step="0.05" class="form-control" id="ureaSoilOC" value="0.65" placeholder="مثال: 0.65">
+                  <span class="input-unit-tag">درصد (OC%)</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>پتانسیل عملکرد دانه مورد انتظار:</label>
+                <select class="form-control" id="ureaYield">
+                  <option value="3">۳ تن در هکتار (عملکرد کم)</option>
+                  <option value="4">۴ تن در هکتار</option>
+                  <option value="5" selected>۵ تن در هکتار (متوسط)</option>
+                  <option value="6">۶ تن در هکتار</option>
+                  <option value="7">۷ تن و بالاتر (عملکرد بالا)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>بافت خاک: <span class="field-hint">تعیین تعداد دفعات تقسیط</span></label>
+                <select class="form-control" id="ureaTexture">
+                  <option value="medium-heavy">متوسط تا سنگین (لوم، رسی)</option>
+                  <option value="light">سبک و شنی (نیازمند ۴ قسط)</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="ureaRainGroup" style="display:none;">
+                <label>بارندگی سال زراعی دیم (میلی‌متر):</label>
+                <div class="input-with-unit">
+                  <input type="number" class="form-control" id="ureaRainfall" value="320">
+                  <span class="input-unit-tag">mm</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label style="cursor:pointer;">
+                  <input type="checkbox" id="ureaLegumeRotation" style="margin-left:6px;">
+                  کشت قبلی تناوب با لگوم/کود سبز بوده است (۱۰-۲۰ kg N کمتر)
+                </label>
+              </div>
+
+              <button class="btn-calc" id="btnCalculateUrea">🧮 محاسبه مقدار و تقویم تقسیط اوره</button>
+            </div>
+
+            <!-- Results -->
+            <div class="result-panel">
+              <div class="result-header">
+                <h3>🌾 توصیه کود نیتروژنی</h3>
+                <span class="result-badge" id="ureaTableRefBadge">جدول ۹</span>
+              </div>
+
+              <div class="result-hero-box">
+                <div>
+                  <span style="font-size:0.88rem;color:var(--text-muted);display:block;">میزان کود اوره مورد نیاز:</span>
+                  <span class="result-hero-val" id="ureaResultValue">310</span>
+                  <span class="result-hero-unit">کیلوگرم در هکتار</span>
+                </div>
+                <div style="font-size:2.5rem;">🧪</div>
+              </div>
+
+              <div class="result-breakdown-list">
+                <div class="breakdown-row">
+                  <span>نیتروژن خالص (N) معادل:</span>
+                  <span class="val" id="ureaEquivalentN">144 کیلوگرم N خالص</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>معادل در قالب سولفات آمونیوم:</span>
+                  <span class="val" id="ureaEquivalentAS">682 کیلوگرم</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>معادل در قالب نیترات آمونیوم:</span>
+                  <span class="val" id="ureaEquivalentAN">465 کیلوگرم</span>
+                </div>
+              </div>
+
+              <h4 style="margin:1rem 0 0.5rem;font-size:0.95rem;">📅 تقویم زمان‌بندی و تقسیط کود اوره:</h4>
+              <div class="schedule-timeline" id="ureaSplitTimeline">
+                <!-- Dynamically filled -->
+              </div>
+
+              <div class="custom-callout tip" id="ureaFoliarNote" style="margin-top:1.25rem;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Phosphorus -->
+        <div class="tab-pane" id="tab-calc-phosphorus">
+          <div class="calc-grid">
+            <div class="form-panel">
+              <h3 style="margin-bottom:1.25rem;">🌾 پارامترهای فسفر خاک</h3>
+
+              <div class="form-group">
+                <label>نوع کشت:</label>
+                <select class="form-control" id="pCultivationType">
+                  <option value="irrigated">گندم آبی (حد بحرانی 15 ppm)</option>
+                  <option value="rainfed">گندم دیم (حد بحرانی 9 ppm)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>غلظت فسفر قابل جذب خاک (P-Olsen):</label>
+                <div class="input-with-unit">
+                  <input type="number" step="0.5" class="form-control" id="pSoilValue" value="8.0">
+                  <span class="input-unit-tag">mg/kg (ppm)</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>اقلیم منطقه:</label>
+                <select class="form-control" id="pClimate">
+                  <option value="warm-humid">گرم و مرطوب</option>
+                  <option value="warm-dry">گرم و خشک</option>
+                  <option value="temperate" selected>معتدل</option>
+                  <option value="cold">سرد</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>عملکرد هدف:</label>
+                <select class="form-control" id="pYield">
+                  <option value="3">۳ تن در هکتار</option>
+                  <option value="4">۴ تن در هکتار</option>
+                  <option value="5" selected>۵ تن در هکتار</option>
+                  <option value="6">۶ تن در هکتار</option>
+                  <option value="7">۷ تن و بالاتر</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>روش کاربرد کود فسفری:</label>
+                <select class="form-control" id="pAppMethod">
+                  <option value="band">نواری با کارنده زیر بذر (توصیه شده - ۴۰٪ صرفه‌جویی)</option>
+                  <option value="broadcast">پخش سطحی و دیسک</option>
+                </select>
+              </div>
+
+              <button class="btn-calc" id="btnCalculateP">🧮 محاسبه سوپرفسفات تریپل (TSP) و DAP</button>
+            </div>
+
+            <div class="result-panel">
+              <div class="result-header">
+                <h3>🌾 توصیه کودهای فسفری</h3>
+                <span class="result-badge" id="pTableRefBadge">جدول ۱۵</span>
+              </div>
+
+              <div class="result-hero-box">
+                <div>
+                  <span style="font-size:0.88rem;color:var(--text-muted);display:block;">سوپرفسفات تریپل یا دی‌آمونیوم فسفات:</span>
+                  <span class="result-hero-val" id="pResultValue">132</span>
+                  <span class="result-hero-unit">کیلوگرم در هکتار</span>
+                </div>
+                <div style="font-size:2.5rem;">🌱</div>
+              </div>
+
+              <div class="result-breakdown-list">
+                <div class="breakdown-row">
+                  <span>پنتااکسید فسفر معادل (P₂O₅):</span>
+                  <span class="val" id="pP2O5Equivalent">61 کیلوگرم P2O5</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>دی‌آمونیوم فسفات (DAP 46%):</span>
+                  <span class="val" id="pDAPEquivalent">132 کیلوگرم</span>
+                </div>
+              </div>
+
+              <div class="custom-callout tip">
+                <div>
+                  <strong>روش مصرف بهینه:</strong> تمام کود فسفری قبل یا همزمان با کاشت به صورت نواری در فاصله ۵ تا ۱۰ سانتی‌متری زیر بذر جایگذاری گردد. در طول داشت می‌توان از کودآبیاری فسفر بالا (۵ تا ۱۰ کیلوگرم) در آب سوم استفاده کرد.
+                </div>
+              </div>
+
+              <p id="pStatusDesc" style="font-size:0.88rem;color:var(--text-main);line-height:1.7;margin-top:0.75rem;"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Potassium -->
+        <div class="tab-pane" id="tab-calc-potassium">
+          <div class="calc-grid">
+            <div class="form-panel">
+              <h3 style="margin-bottom:1.25rem;">🍂 پارامترهای پتاسیم خاک</h3>
+
+              <div class="form-group">
+                <label>نوع کشت:</label>
+                <select class="form-control" id="kCultivationType">
+                  <option value="irrigated">گندم آبی (حد بحرانی 200 ppm)</option>
+                  <option value="rainfed">گندم دیم (معمولاً عدم نیاز)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>پتاسیم قابل استفاده خاک (K-AVAIL):</label>
+                <div class="input-with-unit">
+                  <input type="number" class="form-control" id="kSoilValue" value="125">
+                  <span class="input-unit-tag">mg/kg (ppm)</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>اقلیم منطقه:</label>
+                <select class="form-control" id="kClimate">
+                  <option value="warm-humid">گرم و مرطوب</option>
+                  <option value="warm-dry">گرم و خشک</option>
+                  <option value="temperate" selected>معتدل</option>
+                  <option value="cold">سرد</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>عملکرد مورد انتظار:</label>
+                <select class="form-control" id="kYield">
+                  <option value="3">۳ تن</option>
+                  <option value="4">۴ تن</option>
+                  <option value="5" selected>۵ تن</option>
+                  <option value="6">۶ تن</option>
+                  <option value="7">۷ تن و بالاتر</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>استراتژی کوددهی در خاک‌های ۱۵۰ تا ۲۰۰ ppm:</label>
+                <select class="form-control" id="kStrategy">
+                  <option value="maintenance">استراتژی نگهداشت (Maintenance)</option>
+                  <option value="buildup">استراتژی ذخیره پتاسیم در خاک (Buildup)</option>
+                </select>
+              </div>
+
+              <button class="btn-calc" id="btnCalculateK">🧮 محاسبه سولفات پتاسیم (SOP)</button>
+            </div>
+
+            <div class="result-panel">
+              <div class="result-header">
+                <h3>🍂 توصیه کودهای پتاسیمی</h3>
+                <span class="result-badge" id="kTableRefBadge">جدول ۲۱</span>
+              </div>
+
+              <div class="result-hero-box">
+                <div>
+                  <span style="font-size:0.88rem;color:var(--text-muted);display:block;">سولفات پتاسیم (SOP 50% K₂O):</span>
+                  <span class="result-hero-val" id="kResultValue">190</span>
+                  <span class="result-hero-unit">کیلوگرم در هکتار</span>
+                </div>
+                <div style="font-size:2.5rem;">🍂</div>
+              </div>
+
+              <div class="result-breakdown-list">
+                <div class="breakdown-row">
+                  <span>اکسید پتاسیم خالص معادل (K₂O):</span>
+                  <span class="val" id="kK2OEquivalent">95 کیلوگرم K2O</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>معادل در قالب کلرید پتاسیم (MOP 60%):</span>
+                  <span class="val" id="kMOPEquivalent">158 کیلوگرم</span>
+                </div>
+              </div>
+
+              <div class="custom-callout warning">
+                <div>
+                  <strong>هشدار در خاک‌های شور:</strong> در شرایط شوری خاک، مصرف کود کلرید پتاسیم (KCl) ممنوع است و منحصراً باید از سولفات پتاسیم (K2SO4) استفاده گردد.
+                </div>
+              </div>
+
+              <p id="kStatusDesc" style="font-size:0.88rem;color:var(--text-main);line-height:1.7;margin-top:0.75rem;"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Salinity -->
+        <div class="tab-pane" id="tab-calc-salinity">
+          <div class="calc-grid">
+            <div class="form-panel">
+              <h3 style="margin-bottom:1.25rem;">🌊 آزمون شوری و واکنش خاک</h3>
+
+              <div class="form-group">
+                <label>هدایت الکتریکی عصاره اشباع (ECe):</label>
+                <div class="input-with-unit">
+                  <input type="number" step="0.1" class="form-control" id="salinityECe" value="8.5">
+                  <span class="input-unit-tag">dS/m</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>درصد سدیم تبادلی (ESP):</label>
+                <div class="input-with-unit">
+                  <input type="number" step="0.5" class="form-control" id="salinityESP" value="12">
+                  <span class="input-unit-tag">درصد (ESP%)</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>اسیدیته یا واکنش خاک (pH):</label>
+                <input type="number" step="0.1" class="form-control" id="salinityPH" value="7.8">
+              </div>
+
+              <button class="btn-calc" id="btnCalculateSalinity">🧮 محاسبه نیاز آبشویی و تعدیل کودی</button>
+            </div>
+
+            <div class="result-panel">
+              <div class="result-header">
+                <h3>🌊 طبقه‌بندی و دستورالعمل اصلاح خاک</h3>
+                <span class="result-badge" id="salinitySoilClass">خاک شور</span>
+              </div>
+
+              <div class="result-hero-box">
+                <div>
+                  <span style="font-size:0.88rem;color:var(--text-muted);display:block;">آب مورد نیاز شستشوی خاک:</span>
+                  <span class="result-hero-val" id="salinityWaterVolume">2000</span>
+                  <span class="result-hero-unit">m³/ha</span>
+                </div>
+                <div style="font-size:2.5rem;">💧</div>
+              </div>
+
+              <div class="result-breakdown-list">
+                <div class="breakdown-row">
+                  <span>برنامه نوبت‌های آبیاری سنگین:</span>
+                  <span class="val" id="salinityWaterSchedule">آبیاری اول و دوم سنگین</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>تعدیل نیتروژن در شوری:</span>
+                  <span class="val" id="salinityNAdjustment">+۳۰٪ اوره بیشتر در ۷-۱۲ dS/m</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>تعدیل پتاسیم در شوری:</span>
+                  <span class="val" id="salinityKAdjustment">+۳۰٪ پتاسیم بیشتر در دو قسط</span>
+                </div>
+              </div>
+
+              <p id="salinityWaterDesc" style="font-size:0.88rem;color:var(--text-main);line-height:1.7;margin-top:0.75rem;"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 3: Visual Deficiency Clinic
+           ==================================================================== -->
+      <section class="page-view" id="view-clinic">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>🌿 کلینیک جامع تشخیص تصویری کمبود عناصر غذایی در گندم</h2>
+          <p>با انتخاب اندام یا علامت مشاهده شده در مزرعه، کمبودهای محتمل را بررسی کرده و راهکار اصلاحی را دریافت کنید.</p>
+        </div>
+
+        <div class="clinic-layout">
+          <div class="organ-filter-box">
+            <h4 style="font-size:0.95rem;margin-bottom:0.5rem;">📍 فیلتر بر اساس اندام گیاه</h4>
+            <button class="organ-btn active" data-organ="all">همه عناصر و علائم</button>
+            <button class="organ-btn" data-organ="old-leaves">برگ‌های پیر (تحتانی)</button>
+            <button class="organ-btn" data-organ="young-leaves">برگ‌های جوان (فوقانی)</button>
+            <button class="organ-btn" data-organ="mid-leaves">برگ‌های میانی</button>
+            <button class="organ-btn" data-organ="spikes">سنبله، گل و دانه</button>
+          </div>
+
+          <div class="element-cards-grid" id="clinicCardsContainer">
+            <!-- Dynamically populated from DeficiencyDB -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 4: Phenology & Uptake
+           ==================================================================== -->
+      <section class="page-view" id="view-phenology">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>📈 نقشه فنولوژی و روند جذب تجمعی عناصر در مراحل رشد</h2>
+          <p>تطبیق برنامه کوددهی با مقیاس‌های فیکس (Feekes) و زادکس (Zadoks) برای حداکثر راندمان مصرف آب و کود.</p>
+        </div>
+
+        <div class="roadmap-container">
+          <h3>📊 منحنی دینامیک جذب عناصر N, P, K در طول فصل رشد گندم</h3>
+          <p style="font-size:0.86rem;">بر اساس شکل‌های ۱۲ تا ۱۵ کتابچه؛ بیشترین سرعت جذب نیتروژن و فسفر در فاصله پنجه‌زنی تا غلاف بستن، و پتاسیم در ساقه رفتن رخ می‌دهد.</p>
+          
+          <div class="chart-wrapper" id="phenologyDynamicChart">
+            <!-- SVG Dynamically generated -->
+          </div>
+
+          <h3 style="margin-top:2rem;">🌾 مراحل کلیدی مقیاس فیکس (Feekes Growth Stages)</h3>
+          <div class="feekes-scale-grid">
+            <div class="feekes-stage-card">
+              <div class="feekes-stage-num">Feekes 1-2</div>
+              <div class="feekes-stage-name">سبز شدن و شروع پنجه</div>
+            </div>
+            <div class="feekes-stage-card">
+              <div class="feekes-stage-num">Feekes 3-5</div>
+              <div class="feekes-stage-name">تکمیل پنجه‌زنی و طوقه</div>
+            </div>
+            <div class="feekes-stage-card">
+              <div class="feekes-stage-num">Feekes 6-8</div>
+              <div class="feekes-stage-name">ظهور اولین گره و ساقه</div>
+            </div>
+            <div class="feekes-stage-card">
+              <div class="feekes-stage-num">Feekes 9-10</div>
+              <div class="feekes-stage-name">برگ پرچم و غلاف (بوتینگ)</div>
+            </div>
+            <div class="feekes-stage-card">
+              <div class="feekes-stage-num">Feekes 10.5</div>
+              <div class="feekes-stage-name">گلدهی و گرده‌افشانی</div>
+            </div>
+            <div class="feekes-stage-card">
+              <div class="feekes-stage-num">Feekes 11.1-4</div>
+              <div class="feekes-stage-name">شیری، خمیری و رسیدن</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phenology Fertilizer Calendar Table (Appendix 1) -->
+        <div class="table-responsive">
+          <div class="table-caption">
+            <span>📅 جدول پیوست ۱: تقویم جامع کوددهی گندم منطبق بر مراحل فنولوژیکی</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>نوع کود</th>
+                <th>قبل از کشت</th>
+                <th>دومین آبیاری</th>
+                <th>شروع پنجه‌زنی</th>
+                <th>تکمیل پنجه‌زنی</th>
+                <th>ساقه‌دهی</th>
+                <th>قبل ظهور خوشه</th>
+                <th>دانه‌بندی</th>
+                <th>شیری یا خمیری</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>کود نیتروژنی (اوره)</strong></td>
+                <td>-</td>
+                <td>۳۰٪ توصیه شده</td>
+                <td>-</td>
+                <td>۴۰٪ توصیه شده</td>
+                <td>۳۰٪ توصیه شده</td>
+                <td>-</td>
+                <td>محلول‌پاشی</td>
+                <td>محلول‌پاشی پروتئین</td>
+              </tr>
+              <tr>
+                <td><strong>کود فسفری (TSP/DAP)</strong></td>
+                <td class="highlight-col">۱۰۰٪ نواری</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td><strong>کود پتاسیمی (SOP)</strong></td>
+                <td class="highlight-col">۱۰۰٪ نواری</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td><strong>کودهای ریزمغذی</strong></td>
+                <td>بذرمال / خاکی</td>
+                <td>-</td>
+                <td>-</td>
+                <td>محلول‌پاشی</td>
+                <td>محلول‌پاشی</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td><strong>کودهای با پتاسیم بالا</strong></td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>کودآبیاری</td>
+                <td>محلول‌پاشی / کودآبیاری</td>
+                <td>-</td>
+                <td>محلول‌پاشی</td>
+              </tr>
+              <tr>
+                <td><strong>کودهای با فسفر بالا</strong></td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>کودآبیاری</td>
+                <td>محلول‌پاشی</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td><strong>کودهای آلی</strong></td>
+                <td colspan="8">قبل کاشت توسط دیسک با خاک مخلوط شود</td>
+              </tr>
+              <tr>
+                <td><strong>کودهای زیستی (PGPR)</strong></td>
+                <td>بذرمال</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td><strong>اسیدهای هیومیک</strong></td>
+                <td>بذرمال</td>
+                <td>-</td>
+                <td>-</td>
+                <td>کودآبیاری</td>
+                <td>محلول‌پاشی</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td><strong>محرک‌های رشد (اسید آمینه)</strong></td>
+                <td>-</td>
+                <td>-</td>
+                <td>محلول‌پاشی</td>
+                <td>محلول‌پاشی</td>
+                <td>محلول‌پاشی</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 5: Stress Management
+           ==================================================================== -->
+      <section class="page-view" id="view-stress">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>🛡️ مرکز مدیریت تغذیه گندم در شرایط تنش‌های محیطی</h2>
+          <p>دستورالعمل‌های مقابله با تنش‌های شوری، خشکی، سرمای زودرس/دیررس و گرمای آخر فصل.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-header">
+              <div class="feature-icon-wrapper blue">❄️</div>
+              <span class="feature-tag">تنش سرما و یخبندان</span>
+            </div>
+            <h3>مدیریت تغذیه در تنش سرما</h3>
+            <p>دمای زیر صفر درجه در مرحله گلدهی بساک‌ها را عقیم می‌کند. پتاسیم کافی، فسفر اولیه قوی، اسیدهای آمینه آزاد چپ‌گرا و هیومیک اسید مقاومت غشای سلولی را در برابر یخبندان ارتقاء می‌دهند.</p>
+            <div class="meta-tag">دمای بحرانی گلدهی: منفی ۱.۱°C</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-header">
+              <div class="feature-icon-wrapper amber">☀️</div>
+              <span class="feature-tag">تنش گرما و خشکی آخر فصل</span>
+            </div>
+            <h3>مدیریت تنش گرما بالای ۳۰ درجه</h3>
+            <p>در دمای بالای ۳۰°C سرعت پر شدن دانه کند شده و وزن هزار دانه افت می‌کند. محلول‌پاشی پتاسیم در مرحله ظهور خوشه و شیری شدن دانه، فتوسنتز را حفظ می‌کند.</p>
+            <div class="meta-tag">کاهش تا ۵۰٪ عملکرد با ۲ درجه افزایش دما</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-header">
+              <div class="feature-icon-wrapper green">💧</div>
+              <span class="feature-tag">تنش کم‌آبی و خشکی</span>
+            </div>
+            <h3>افزایش ظرفیت نگهداری آب</h3>
+            <p>هر ۱٪ افزایش ماده آلی خاک، ۳.۷٪ ظرفیت نگهداری آب را افزایش می‌دهد. عناصر Zn, Si, Mg و آنزیم‌های آنتی‌اکسیدان (SOD, CAT) اثرات مخرب ROS را مهار می‌کنند.</p>
+            <div class="meta-tag">نقش روزنه‌ای پتاسیم در کاهش تبخیر</div>
+          </div>
+        </div>
+
+        <!-- Cold damage critical temperature table (Table 27) -->
+        <div class="table-responsive" style="margin-top:2rem;">
+          <div class="table-caption">
+            <span>❄️ جدول ۲۷: مرحله رشد گندم و میزان خسارت سرمازدگی (در تماس بیش از ۲ ساعت)</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>مرحله رشد گندم</th>
+                <th>دمای بحرانی (°C)</th>
+                <th>علائم بالینی سرمازدگی</th>
+                <th>میزان تأثیر بر عملکرد دانه</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>پنجه زدن</td>
+                <td class="highlight-col">-11 °C</td>
+                <td>زرد شدن و سوختن برگ‌ها</td>
+                <td>کم تا متوسط</td>
+              </tr>
+              <tr>
+                <td>ساقه رفتن</td>
+                <td class="highlight-col">-4.4 °C</td>
+                <td>سوختن برگ‌ها / از بین رفتن نقطه رشد (Growing Point)</td>
+                <td>متوسط تا زیاد</td>
+              </tr>
+              <tr>
+                <td>آبستنی (Booting)</td>
+                <td class="highlight-col">-2.2 °C</td>
+                <td>عقیم شدن گلچه‌ها / رنگ‌پریدگی خوشه‌ها</td>
+                <td>عمدتاً زیاد</td>
+              </tr>
+              <tr>
+                <td>خوشه رفتن</td>
+                <td class="highlight-col">-1.1 °C</td>
+                <td>عقیم شدن گلچه‌ها، سفید و بی‌رنگ شدن خوشه و برگ‌ها</td>
+                <td>بسیار زیاد (فاجعه‌بار)</td>
+              </tr>
+              <tr>
+                <td>به گل رفتن (Anthesis)</td>
+                <td class="highlight-col">-1.1 °C</td>
+                <td>عقیم شدن بساک‌ها، پیچیدگی بساک و عدم تلقیح</td>
+                <td>بسیار زیاد</td>
+              </tr>
+              <tr>
+                <td>شیری شدن دانه</td>
+                <td class="highlight-col">-2.2 °C</td>
+                <td>بی‌رنگ شدن خوشه‌ها، چروکیده و لاغر شدن دانه‌ها</td>
+                <td>عمدتاً زیاد</td>
+              </tr>
+              <tr>
+                <td>سفت شدن دانه</td>
+                <td class="highlight-col">-2.2 °C</td>
+                <td>دانه‌ها بی‌رنگ و چروکیده</td>
+                <td>کم تا متوسط</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 6: Conservation Agriculture
+           ==================================================================== -->
+      <section class="page-view" id="view-conservation">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>🌱 مدیریت حاصلخیزی و تغذیه در کشاورزی حفاظتی (بی‌خاک‌ورزی و کم‌خاک‌ورزی)</h2>
+          <p>محاسبه نیتروژن تکمیلی برای تجزیه کلش و مدیریت کودی در مزارع با حفظ بقایای گیاهی.</p>
+        </div>
+
+        <div class="calc-grid">
+          <div class="form-panel">
+            <h3 style="margin-bottom:1.25rem;">🌾 محاسبه‌گر اوره مازاد برای پوساندن بقایا</h3>
+
+            <div class="form-group">
+              <label>سامانه کشت:</label>
+              <select class="form-control" id="caSystemType">
+                <option value="no-till">بی‌خاک‌ورزی (No-Till / کشت مستقیم)</option>
+                <option value="min-till">کم‌خاک‌ورزی (Minimum Tillage)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>نوع محصول کشت قبلی (منبع کلش):</label>
+              <select class="form-control" id="residueCropType">
+                <option value="wheat">کلش گندم یا جو (۳۵ کیلوگرم اوره به ازای هر تن)</option>
+                <option value="corn">بقایای ذرت دانه‌ای (۳۰ کیلوگرم اوره به ازای هر تن)</option>
+                <option value="cotton">بقایای پنبه یا آفتابگردان (۲۵ کیلوگرم اوره/تن)</option>
+                <option value="veggies">سبزی و صیفی، گوجه، سیب‌زمینی (۲۰ کیلوگرم اوره/تن)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>میزان تخمینی کاه و کلش در هکتار (تن):</label>
+              <div class="input-with-unit">
+                <input type="number" step="0.5" class="form-control" id="residueStubbleTons" value="2.5">
+                <span class="input-unit-tag">تن کلش/ha</span>
+              </div>
+            </div>
+
+            <button class="btn-calc" id="btnCalculateResidue">🧮 محاسبه نیتروژن مازاد بقایا</button>
+          </div>
+
+          <div class="result-panel">
+            <div class="result-header">
+              <h3>🌱 نیتروژن مورد نیاز میکروب‌های تجزیه‌کننده</h3>
+              <span class="result-badge">C/N Ratio Balance</span>
+            </div>
+
+            <div class="result-hero-box">
+              <div>
+                <span style="font-size:0.88rem;color:var(--text-muted);display:block;">کود اوره اضافه بر نیاز گیاه:</span>
+                <span class="result-hero-val" id="residueExtraUrea">88</span>
+                <span class="result-hero-unit">kg/ha</span>
+              </div>
+              <div style="font-size:2.5rem;">🌾</div>
+            </div>
+
+            <div class="result-breakdown-list">
+              <div class="breakdown-row">
+                <span>نیتروژن خالص اضافی:</span>
+                <span class="val" id="residueExtraN">41 کیلوگرم N</span>
+              </div>
+            </div>
+
+            <div id="residueSplitDetails" style="font-size:0.88rem;line-height:1.7;margin-top:0.75rem;"></div>
+
+            <div class="custom-callout warning">
+              <div>
+                <strong>⚠️ هشدار مهم:</strong> هرگز کود نیتروژنی آمونیومی را به همراه بذر در عمق یکسان مصرف نکنید زیرا باعث سوزش بذر می‌شود (حداکثر ۱۰ kg N با بذر مجاز است).
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 7: Fertilizer Converter
+           ==================================================================== -->
+      <section class="page-view" id="view-converter">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>⚖️ مبدل تخصصی ضرایب تبدیل عناصر و فرمول‌های کودی</h2>
+          <p>بر اساس جدول پیوست ۲ کتابچه؛ تبدیل دقیق فرم‌های اکسیدی، عنصری و ترکیبات کودی.</p>
+        </div>
+
+        <div class="calc-grid">
+          <div class="form-panel">
+            <h3 style="margin-bottom:1.25rem;">🔄 محاسبه‌گر تبدیل سریع</h3>
+
+            <div class="form-group">
+              <label>انتخاب رابطه تبدیل:</label>
+              <select class="form-control" id="convertSelectFactor">
+                <option value="0">N به اوره CO(NH2)2 (ضریب ۲.۱۶۰)</option>
+                <option value="1">N به سولفات آمونیوم (ضریب ۴.۷۱۶)</option>
+                <option value="2">N به نیترات آمونیوم (ضریب ۲.۸۵۷)</option>
+                <option value="3">P به P2O5 پنتااکسید فسفر (ضریب ۲.۲۹۱)</option>
+                <option value="4">P2O5 به فسفر خالص P (ضریب ۰.۴۳۶)</option>
+                <option value="5">K به K2O اکسید پتاسیم (ضریب ۱.۲۰۵)</option>
+                <option value="6">K2O به پتاسیم خالص K (ضریب ۰.۸۳۰)</option>
+                <option value="7">K2O به کلرید پتاسیم KCl (ضریب ۱.۵۸۰)</option>
+                <option value="8">Zn به سولفات روی مونو ZnSO4.H2O (ضریب ۲.۷۷۸)</option>
+                <option value="9">Zn به سولفات روی ۷ آبه (ضریب ۴.۳۴۸)</option>
+                <option value="10">Fe به سولفات آهن FeSO4 (ضریب ۲.۷۲۰)</option>
+                <option value="11">Mn به سولفات منگنز MnSO4 (ضریب ۲.۷۴۸)</option>
+                <option value="12">S به سولفات SO4 (ضریب ۲.۹۹۶)</option>
+                <option value="13">Ca به اکسید کلسیم CaO (ضریب ۱.۳۹۹)</option>
+                <option value="14">Mg به اکسید منیزیم MgO (ضریب ۱.۶۵۸)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>مقدار ورودی:</label>
+              <input type="number" step="0.1" class="form-control" id="convertInputValue" value="100">
+            </div>
+
+            <button class="btn-calc" id="btnRunConvert">🔄 انجام تبدیل فرمول</button>
+          </div>
+
+          <div class="result-panel">
+            <div class="result-header">
+              <h3>نتیجه تبدیل فرم کودی</h3>
+            </div>
+            <div class="result-hero-box" id="convertResultBox">
+              <strong>۱۰۰</strong> واحد N = <strong style="color:var(--primary);font-size:1.3rem">۲۱۶</strong> واحد اوره
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive" style="margin-top:2rem;">
+          <div class="table-caption">
+            <span>📋 جدول پیوست ۲: ضرایب تبدیل برای عناصر غذایی در کودهای مختلف</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>از این فرم</th>
+                <th>به این فرم</th>
+                <th>ضریب تبدیل</th>
+                <th>فرمول محاسباتی</th>
+              </tr>
+            </thead>
+            <tbody id="conversionTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 8: Farm Prescription Generator
+           ==================================================================== -->
+      <section class="page-view" id="view-prescription">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>📄 صدور نسخه هوشمند جامع تغذیه و حاصلخیزی مزرعه</h2>
+          <p>تکمیل اطلاعات مزرعه برای صدور شناسنامه تغذیه‌ای کامل با قابلیت چاپ و ذخیره به عنوان PDF.</p>
+        </div>
+
+        <div class="form-panel" style="max-width:800px;margin:0 auto;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>نام و نام‌خانوادگی کشاورز:</label>
+              <input type="text" class="form-control" id="rxFarmerName" value="حاج علی محمدی">
+            </div>
+            <div class="form-group">
+              <label>موقعیت و استان مزرعه:</label>
+              <input type="text" class="form-control" id="rxLocation" value="دشت قزوین - قطعه شماره ۴">
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label>سطح زیر کشت (هکتار):</label>
+              <input type="number" step="0.5" class="form-control" id="rxArea" value="10">
+            </div>
+            <div class="form-group">
+              <label>نوع کشت:</label>
+              <select class="form-control" id="rxCultivation">
+                <option value="irrigated">گندم آبی</option>
+                <option value="rainfed">گندم دیم</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>پتانسیل عملکرد (تن/هکتار):</label>
+              <select class="form-control" id="rxYield">
+                <option value="4">۴ تن</option>
+                <option value="5" selected>۵ تن</option>
+                <option value="6">۶ تن</option>
+                <option value="7">۷ تن و بالاتر</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>اقلیم منطقه:</label>
+            <select class="form-control" id="rxClimate">
+              <option value="warm-humid">گرم و مرطوب</option>
+              <option value="warm-dry">گرم و خشک</option>
+              <option value="temperate" selected>معتدل</option>
+              <option value="cold">سرد</option>
+            </select>
+          </div>
+
+          <button class="btn-calc" id="btnGeneratePrescription">✨ صدور نسخه و محاسبه کل کیسه‌های کود</button>
+        </div>
+
+        <div id="prescriptionOutput" style="display:none;max-width:900px;margin:2rem auto;">
+          <!-- Dynamically populated prescription card -->
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 9: Technical Library
+           ==================================================================== -->
+      <section class="page-view" id="view-library">
+        <div class="hero-banner" style="padding:1.5rem 1.75rem;">
+          <h2>📚 دانشنامه و کتابخانه فنی دستورالعمل جامع گندم</h2>
+          <p>متن کامل و معتبر ۵ فصل راهنما، فهرست نویسندگان، منابع و اصول علمی مدیریت خاک.</p>
+        </div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2rem;line-height:1.9;">
+          <div style="background:linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(217,119,6,0.08) 100%);border:1px solid rgba(34,197,94,0.25);border-radius:var(--radius-md);padding:1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;">
+            <div style="font-size:2.4rem;">👨‍🔬</div>
+            <div>
+              <h4 style="font-size:1.1rem;font-weight:800;color:var(--text-main);margin-bottom:0.2rem;">صابر حیدری</h4>
+              <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0;">محقق و عضو هیات علمی مرکز تحقیقات، آموزش و ترویج کشاورزی و منابع طبیعی جنوب استان کرمان</p>
+              <span style="font-size:0.78rem;color:var(--primary);font-weight:600;">طراح، تحلیل‌گر محتوا و ناظر پیاده‌سازی سامانه دیجیتال گندم‌یار</span>
+            </div>
+          </div>
+
+          <h3 style="color:var(--primary);margin-bottom:1rem;">👥 نویسندگان و تدوین‌کنندگان سند مرجع:</h3>
+          <p>فرهاد مشیری، علی‌اصغر شهابی، پیمان کشاورز، زهرا خادمی، ولی فیضی‌اصل، محمدمهدی طهرانی، هادی اسدی رحمانی، سعید سعادت، محمدنبی شهابی، محمدحسین صدری، ناصر رشیدی، کاظم خاوازی (موسسه تحقیقات خاک و آب کشور).</p>
+
+          <hr style="margin:1.5rem 0;border:0;border-top:1px solid var(--border-light);">
+
+          <h3 style="margin-bottom:0.75rem;">📖 سرفصل‌های جامع راهنما:</h3>
+          <ul style="padding-right:1.5rem;color:var(--text-muted);">
+            <li><strong>فصل ۱: کلیات</strong> - امنیت غذایی، میزان برداشت عناصر به ازای هر تن دانه و کلش، کشاورزی پایدار.</li>
+            <li><strong>فصل ۲: روش‌های تشخیص کمبود</strong> - آزمون خاک، نمونه‌برداری مارپیچ، تجزیه گیاه و علائم بالینی.</li>
+            <li><strong>فصل ۳: مدیریت تلفیقی تغذیه</strong> - مصرف بهینه اوره، فسفر، پتاسیم، گوگرد، عناصر کم‌مصرف، کودهای آلی و زیستی (PGPR و تیوباسیلوس).</li>
+            <li><strong>فصل ۴: مدیریت تنش‌های محیطی</strong> - تنش شوری و سدیمی، اصلاح خاک، تنش خشکی، تنش سرما و گرما.</li>
+            <li><strong>فصل ۵: حاصلخیزی در کشاورزی حفاظتی</strong> - بی‌خاک‌ورزی، کم‌خاک‌ورزی و محاسبه نیتروژن بقایا.</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     Modals
+     ========================================================================== -->
+<!-- Deficiency Detail Modal -->
+<div class="modal-overlay" id="deficiencyModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3 id="deficiencyModalTitle" style="font-size:1.15rem;">جزئیات کمبود</h3>
+      <button class="icon-btn modal-close-btn" style="border:none;background:transparent;font-size:1.4rem;">✕</button>
+    </div>
+    <div class="modal-body" id="deficiencyModalBody"></div>
+    <div class="modal-footer">
+      <button class="btn-calc modal-close-btn" style="width:auto;padding:0.5rem 1.25rem;">بستن پنجره</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Search Modal -->
+<div class="modal-overlay" id="searchModal">
+  <div class="modal-dialog search-modal-box">
+    <input type="text" class="search-input-field" id="searchInput" placeholder="عبارت مورد نظر خود را تایپ کنید (مثلاً: روی، اوره، سرما، جدول ۱۵...)">
+    <div class="search-results-list" id="searchResultsList"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

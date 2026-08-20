@@ -1,0 +1,9 @@
+# Git Ignore for Wheat Nutrition Platform
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.vscode/
+.idea/
+dist/
+build/
