@@ -68,6 +68,32 @@ WheatFertile/
 
 ---
 
+## 🚀 راهنمای اجرا و استقرار در GitHub Pages
+
+### ۱. اجرای محلی (Local Execution)
+نیازی به نصب هیچ پکیج اضافی نیست. کافی است فایل `index.html` را مستقیماً در هر مرورگری (Chrome, Edge, Firefox, Safari) باز کنید یا از افزونه **Live Server** در VS Code استفاده نمایید.
+
+### ۲. ارسال به گیت‌هاب (Git Push)
+برای ساخت مخزن گیت و ارسال کدها دستورات زیر را در ترمینال پوشه پروژه اجرا کنید:
+
+```bash
+git init
+git add .
+git commit -m "feat: Initial commit of WheatFertile Pro web platform"
+git branch -M main
+git remote add origin https://github.com/sabhe62/gandom-yar.git
+git push -u origin main
+```
+
+### ۳. راه‌اندازی GitHub Pages (انتشار آنلاین و رایگان)
+1. به صفحه مخزن خود در GitHub بروید.
+2. وارد تب **Settings** شده و از منوی سمت چپ گزینه **Pages** را انتخاب کنید.
+3. در بخش **Build and deployment**، گزینه **Source** را روی `Deploy from a branch` قرار دهید.
+4. شاخه (Branch) را روی `main` و پوشه را روی `/ (root)` تنظیم کرده و دکمه **Save** را بزنید.
+5. پس از ۱ تا ۲ دقیقه، وبسایت شما در آدرس `https://sabhe62.github.io/gandom-yar/` به صورت زنده در دسترس خواهد بود.
+
+---
+
 ## 🏛️ ساختار و منابع علمی (Scientific Reference & Credits)
 
 - **طراح و ناظر علمی سامانه:** **صابر حیدری** (محقق و عضو هیات علمی مرکز تحقیقات، آموزش و ترویج کشاورزی و منابع طبیعی جنوب استان کرمان)

@@ -348,26 +348,43 @@ function applyTheme(theme) {
 }
 
 function setupNavigation() {
-  const navItems = document.querySelectorAll('.nav-item, [data-nav-target]');
+  const navItems = document.querySelectorAll('.nav-item, .bottom-nav-item, [data-nav-target]');
   const menuBtn = document.getElementById('menuToggleBtn');
   const sidebar = document.getElementById('appSidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+
+  const closeSidebar = () => {
+    if (sidebar) sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+  };
+
+  const openSidebar = () => {
+    if (sidebar) sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+  };
 
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       const targetView = item.getAttribute('data-view') || item.getAttribute('data-nav-target');
       if (targetView) {
         navigateTo(targetView);
-        if (sidebar && sidebar.classList.contains('open')) {
-          sidebar.classList.remove('open');
-        }
+        closeSidebar();
       }
     });
   });
 
-  if (menuBtn && sidebar) {
+  if (menuBtn) {
     menuBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+      if (sidebar && sidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
     });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeSidebar);
   }
 
   // Subtabs switching
@@ -404,7 +421,17 @@ function navigateTo(viewId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Sync Sidebar
   document.querySelectorAll('.nav-item').forEach(item => {
+    if (item.getAttribute('data-view') === viewId) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+
+  // Sync Bottom Navigation
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
     if (item.getAttribute('data-view') === viewId) {
       item.classList.add('active');
     } else {

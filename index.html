@@ -84,6 +84,9 @@
     </div>
   </aside>
 
+  <!-- Sidebar Backdrop Overlay for Mobile -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
   <!-- ========================================================================
        Main Content Frame
        ======================================================================== -->
@@ -93,6 +96,10 @@
     <header class="top-navbar">
       <div class="navbar-start">
         <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle Menu">☰</button>
+        <div class="mobile-brand">
+          <span class="mobile-logo">🌾</span>
+          <span>گندم‌یار</span>
+        </div>
         <button class="search-trigger-btn" id="searchTriggerBtn">
           <span>🔍</span>
           <span>جستجوی سریع عناصر، جداول، علائم...</span>
@@ -1155,6 +1162,32 @@
     </main>
   </div>
 </div>
+
+<!-- ==========================================================================
+     Mobile Bottom Navigation Bar
+     ========================================================================== -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+  <div class="bottom-nav-item active" data-view="dashboard">
+    <span class="bottom-nav-icon">📊</span>
+    <span>پیشخوان</span>
+  </div>
+  <div class="bottom-nav-item" data-view="calculators">
+    <span class="bottom-nav-icon">🧮</span>
+    <span>کودها</span>
+  </div>
+  <div class="bottom-nav-item" data-view="clinic">
+    <span class="bottom-nav-icon">🌿</span>
+    <span>کمبودها</span>
+  </div>
+  <div class="bottom-nav-item" data-view="stress">
+    <span class="bottom-nav-icon">🛡️</span>
+    <span>تنش‌ها</span>
+  </div>
+  <div class="bottom-nav-item" data-view="prescription">
+    <span class="bottom-nav-icon">📄</span>
+    <span>نسخه</span>
+  </div>
+</nav>
 
 <!-- ==========================================================================
      Modals
